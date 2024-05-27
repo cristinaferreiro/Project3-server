@@ -58,20 +58,20 @@ ROUTES - CLIENT
 
 
 | All Artworks      |` /artworks`                       | 
-| Artworks Details  | `/artworks/:artworkId`            | 
-| Add New Artwork   | `/new-artwork`                    | 
-| Edit Artwork      | `/edit-artwork`                   | 
+| Artworks Details  | `/artworks/:artworkId`            | Protected
+| Add New Artwork   | `/new-artwork`                    | Protected
+| Edit Artwork      | `/edit-artwork`                   | Protected
 
 
 | All Users         | `/users`                           | 
-| User Details      | `/users/:userId`                   | 
+| User Details      | `/users/:userId`                   | Protected
 | Add New User      | `/new-user`                        | (REVISAR)
 
 
-| All Exhibitions        |` /exhibitions`                | 
-| Exhibitions Details    | `/exhibitions/:exhibitionId`  | 
-| Add New Exhibitions    | `/new-exhibition`             | 
-| Edit Exhibitions       | `/edit-exhibition`            | 
+| All Exhibitions        |` /exhibitions`                | Protected
+| Exhibitions Details    | `/exhibitions/:exhibitionId`  | Protected
+| Add New Exhibitions    | `/new-exhibition`             | Protected
+| Edit Exhibitions       | `/edit-exhibition`            | Protected
 
 
 | about us          | `/sobre-nosotros`       | 
