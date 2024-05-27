@@ -7,17 +7,18 @@ router
     .post('/', isAuthenticated, (req, res, next) => {
 
         const { title, technique, dimension, year, image, price } = req.body;
-        const user = req.payload._id;
+        const userId = req.payload._id;
 
         Artwork
             .create({
                 title,
-                artist,
+                artist: userId,
                 technique,
                 dimension,
                 year,
                 image,
                 price
+
             })
             .then(artwork => res.status(201).json(artwork))
             .catch(err => next(err))

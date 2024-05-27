@@ -6,14 +6,14 @@ const router = require("express").Router()
 
 router.post('/', isAuthenticated, (req, res, next) => {
     const { title, date, description, place, owner, artworks } = req.body;
-    const user = req.payload._id;
+    const userId = req.payload._id;
 
     Exhibition.create({
         title,
         date,
         description,
         place,
-        owner,
+        owner: userId,
         artworks
     })
         .then(exhibition => res.status(201).json(exhibition))
