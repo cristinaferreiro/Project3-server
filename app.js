@@ -2,7 +2,7 @@
 // https://www.npmjs.com/package/dotenv
 require("dotenv").config();
 
-// ℹ️ Connects to the database
+// ℹ️ Connects to the databas
 require("./db");
 
 // Handles http requests (express is node js framework)
