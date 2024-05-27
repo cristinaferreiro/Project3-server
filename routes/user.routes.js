@@ -1,6 +1,8 @@
 const router = require("express").Router()
 const User = require('../models/User.model')
 const { isAuthenticated } = require('../middleware/jwt.middleware')
+const Exhibition = require("../models/Exhibition.model")
+const Artwork = require("../models/Artwork.model")
 
 
 router
@@ -13,13 +15,27 @@ router
 
 router
     .get('/:id', isAuthenticated, (req, res, next) => {
-        User.findById(req.params.id)
-            .then(user => {
-                if (!user) {
-                    res.status(404).json({ message: "User not found" })
-                } else {
-                    res.json(user)
-                }
+
+        const { id: userId } = req.params
+
+        console.log(userId)
+
+        const promises = [
+            User.findById(userId),
+            Exhibition.find({ owner: userId }),
+            Artwork.find({ artist: userId })
+        ]
+
+        Promise
+            .all(promises)
+            .then(responses => {
+                const userInfo = responses[0]
+                const exhibitionsInfo = responses[1]
+                const artworksInfo = responses[2]
+
+                const fullResponse = { userInfo, exhibitionsInfo, artworksInfo }
+
+                res.json(fullResponse)
             })
             .catch(err => next(err))
     })
