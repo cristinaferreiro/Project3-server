@@ -40,6 +40,14 @@ router
             .catch(err => next(err))
     })
 
+router.get('/:id', (req, res, next) => {
+    Exhibition.findById(req.params.id)
+        .populate('owner', 'username lastname birthyear')
+        .populate('artworks', 'title technique dimension artworkyear artworkimage price')
+        .then(user => res.status(201).json(user))
+        .catch(err => next(err))
+});
+
 
 router
     .post('/', (req, res, next) => {
@@ -54,33 +62,20 @@ router
             .catch(err => next(err))
     })
 
-
 router
     .put('/:id', isAuthenticated, (req, res, next) => {
-        const { country, birthyear, avatar, userbio } = req.body
+        const { username, country, birthyear, avatar, userbio } = req.body
 
-        User.findByIdAndUpdate(req.params.id, { country, birthyear, avatar, userbio }, { new: true })
-            .then(updatedUser => {
-                if (!updatedUser) {
-                    res.status(404).json({ message: "User not found" })
-                } else {
-                    res.json(updatedUser)
-                }
-            })
+        User.findByIdAndUpdate(req.params.id, { username, country, birthyear, avatar, userbio }, { new: true })
+            .then(user => res.status(201).json(user))
             .catch(err => next(err))
     })
 
 
 router
     .delete('/:id', isAuthenticated, (req, res, next) => {
-        User.findByIdAndRemove(req.params.id)
-            .then(deletedUser => {
-                if (!deletedUser) {
-                    res.status(404).json({ message: "User not found" })
-                } else {
-                    res.json({ message: "User deleted successfully" })
-                }
-            })
+        User.findByIdAndDelete(req.params.id)
+            .then(user => res.status(201).json(user))
             .catch(err => next(err))
     })
 
