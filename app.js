@@ -1,4 +1,5 @@
 
+// ℹ️ Connects to the databas
 require("dotenv").config();
 require("./db");
 
