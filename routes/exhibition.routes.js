@@ -21,14 +21,50 @@ router.post('/', isAuthenticated, (req, res, next) => {
         .catch(err => next(err))
 });
 
-router.get('/', (req, res, next) => {
-    Exhibition
-        .find()
-        .populate('user', 'username lastname birthyear') //--------MODIFICAR
-        .populate('artworks', 'title technique dimension artworkyear artworkimage price') //--------MODIFICAR
-        .then(exhibitions => res.status(200).json(exhibitions))
-        .catch(err => next(err))
-});
+router
+    .get('/', (req, res, next) => {
+        Exhibition
+            .find()
+            .populate('user', 'username lastname birthyear') //--------MODIFICAR
+            .populate('artworks', 'title technique dimension artworkyear artworkimage price') //--------MODIFICAR
+            .then(exhibitions => res.status(200).json(exhibitions))
+            .catch(err => next(err))
+    });
+
+
+router
+    .get('/:id', isAuthenticated, (req, res, next) => {
+
+        const { id: artworkId } = req.params
+
+        console.log(artworkId)
+
+        Exhibition
+            .findById(artworkId)
+            .then(response => res.json(response))
+            .catch(err => next(err))
+    });
+
+
+router
+    .put('/:id', isAuthenticated, (req, res, next) => {
+        const { title, date, description, place, owner, artworks } = req.body
+
+        Exhibition
+            .findByIdAndUpdate(req.params.id, { title, date, description, place, owner, artworks }, { new: true })
+            .then(exhibitions => res.status(200).json(exhibitions))
+            .catch(err => next(err))
+    });
+
+router
+    .delete('/:id', (req, res, next) => {
+
+
+        Exhibition
+            .findByIdAndDelete(req.params.id)
+            .then(exhibitions => res.status(200).json(exhibitions))
+            .catch(err => next(err))
+    })
 
 
 

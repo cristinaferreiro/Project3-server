@@ -32,4 +32,43 @@ router
             .catch(err => next(err))
     });
 
+
+router
+    .get('/:id', isAuthenticated, (req, res, next) => {
+
+        const { id: artworkId } = req.params
+
+        console.log(artworkId)
+
+        Artwork
+            .findById(artworkId)
+            .then(response => res.json(response))
+            .catch(err => next(err))
+    });
+
+
+router
+    .put('/:id', isAuthenticated, (req, res, next) => {
+        const { title, technique, dimension, year, image, price } = req.body
+
+        Artwork
+            .findByIdAndUpdate(
+                req.params.id, { title, technique, dimension, year, image, price }, { new: true })
+            .then(artworks => res.status(200).json(artworks))
+            .catch(err => next(err))
+    });
+
+router
+    .delete('/:id', (req, res, next) => {
+
+
+        Artwork
+            .findByIdAndDelete(req.params.id)
+            .then(artworks => res.status(200).json(artworks))
+            .catch(err => next(err))
+    })
+
+
+
+
 module.exports = router;
