@@ -29,4 +29,4 @@ const exhibitionSchema = new Schema({
     timestamps: true
 });
 
-module.exports = model('Exhibition', exhibitionSchema)
+module.exports = model('Exhibition', exhibitionSchema);

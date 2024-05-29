@@ -7,12 +7,12 @@ router
     .post('/', isAuthenticated, (req, res, next) => {
 
         const { title, technique, dimension, year, image, price } = req.body;
-        const userId = req.payload._id;
+        const owner = req.payload._id;
 
         Artwork
             .create({
                 title,
-                artist: userId,
+                owner,
                 technique,
                 dimension,
                 year,

@@ -51,13 +51,13 @@ router.get('/:id', (req, res, next) => {
 
 router
     .post('/', (req, res, next) => {
-        const { username, email, password, lastname, country, birthyear, avatar, userbio } = req.body
+        const { username, email, password, lastname, country, birthyear, userimage, userbio } = req.body
 
-        if (!username || !email || !password || !lastname || !country || !birthyear) {
+        if (!username || !email || !password || !lastname || !country || !birthyear || !userimage) {
             return res.status(400).json({ message: "All fields are required" })
         }
 
-        User.create({ username, email, password, lastname, country, birthyear, avatar, userbio })
+        User.create({ username, email, password, lastname, country, birthyear, userimage, userbio })
             .then(user => res.status(201).json(user))
             .catch(err => next(err))
     })
@@ -66,7 +66,7 @@ router
     .put('/:id', isAuthenticated, (req, res, next) => {
         const { username, country, birthyear, avatar, userbio } = req.body
 
-        User.findByIdAndUpdate(req.params.id, { username, country, birthyear, avatar, userbio }, { new: true })
+        User.findByIdAndUpdate(req.params.id, { username, country, birthyear, userimage, userbio }, { new: true })
             .then(user => res.status(201).json(user))
             .catch(err => next(err))
     })

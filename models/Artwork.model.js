@@ -33,3 +33,4 @@ const artworkSchema = new Schema({
 });
 
 module.exports = model("Artwork", artworkSchema);
+
