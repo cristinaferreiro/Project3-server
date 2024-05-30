@@ -38,6 +38,7 @@ router
 
         Exhibition
             .findById(artworkId)
+            .populate('owner artworks')
             .then(response => res.json(response))
             .catch(err => next(err))
     });

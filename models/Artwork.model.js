@@ -5,9 +5,11 @@ const artworkSchema = new Schema({
         type: String,
         required: true
     },
-    artist: {
-        type: Schema.ObjectId,
-        ref: 'User'
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+
     },
     technique: {
         type: String,

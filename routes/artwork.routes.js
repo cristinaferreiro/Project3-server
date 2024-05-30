@@ -27,7 +27,7 @@ router
 router
     .get('/', (req, res, next) => {
         Artwork.find()
-            .populate('user', 'username lastname')
+            .populate('owner')
             .then(artworks => res.status(200).json(artworks))
             .catch(err => next(err))
     });
@@ -42,6 +42,7 @@ router
 
         Artwork
             .findById(artworkId)
+            .populate('owner')
             .then(response => res.json(response))
             .catch(err => next(err))
     });
