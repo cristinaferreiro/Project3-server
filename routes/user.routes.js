@@ -23,7 +23,7 @@ router
         const promises = [
             User.findById(userId),
             Exhibition.find({ owner: userId }),
-            Artwork.find({ artist: userId })
+            Artwork.find({ owner: userId })
         ]
 
         Promise
