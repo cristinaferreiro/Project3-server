@@ -11,4 +11,6 @@ module.exports = app => {
   const exhibitionRouter = require("./exhibition.routes")
   app.use("/api/exhibitions", exhibitionRouter)
 
+  const uploadRouter = require("./upload.routes")
+  app.use("/upload", uploadRouter)
 }

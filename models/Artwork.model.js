@@ -5,8 +5,8 @@ const artworkSchema = new Schema({
         type: String,
         required: true
     },
-    artist: {
-        type: Schema.ObjectId,
+    owner: {
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
     technique: {
@@ -22,7 +22,8 @@ const artworkSchema = new Schema({
         required: true
     },
     image: {
-        type: String
+        type: String,
+        required: true
     },
     price: {
         type: Number,

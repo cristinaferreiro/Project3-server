@@ -23,7 +23,7 @@ router
         const promises = [
             User.findById(userId),
             Exhibition.find({ owner: userId }),
-            Artwork.find({ artist: userId })
+            Artwork.find({ owner: userId })
         ]
 
         Promise
@@ -51,22 +51,22 @@ router.get('/:id', (req, res, next) => {
 
 router
     .post('/', (req, res, next) => {
-        const { username, email, password, lastname, country, birthyear, userimage, userbio } = req.body
+        const { username, email, password, lastname, country, birthyear, userimage, backgrdimage, userbio } = req.body
 
-        if (!username || !email || !password || !lastname || !country || !birthyear || !userimage) {
+        if (!username || !email || !password || !lastname || !country || !birthyear || !userimage || !backgrdimage) {
             return res.status(400).json({ message: "All fields are required" })
         }
 
-        User.create({ username, email, password, lastname, country, birthyear, userimage, userbio })
+        User.create({ username, email, password, lastname, country, birthyear, userimage, backgrdimage, userbio })
             .then(user => res.status(201).json(user))
             .catch(err => next(err))
     })
 
 router
     .put('/:id', isAuthenticated, (req, res, next) => {
-        const { username, country, birthyear, avatar, userbio } = req.body
+        const { username, country, birthyear, userimage, backgrdimage, userbio } = req.body
 
-        User.findByIdAndUpdate(req.params.id, { username, country, birthyear, userimage, userbio }, { new: true })
+        User.findByIdAndUpdate(req.params.id, { username, country, birthyear, userimage, backgrdimage, userbio }, { new: true })
             .then(user => res.status(201).json(user))
             .catch(err => next(err))
     })

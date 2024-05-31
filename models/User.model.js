@@ -30,6 +30,9 @@ const userSchema = new Schema({
   userimage: {
     type: String
   },
+  backgrdimage: {
+    type: String
+  },
   userbio: {
     type: String
   }

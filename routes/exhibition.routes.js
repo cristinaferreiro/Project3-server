@@ -5,7 +5,7 @@ const { isAuthenticated } = require('./../middleware/jwt.middleware');
 const router = require("express").Router()
 
 router.post('/', isAuthenticated, (req, res, next) => {
-    const { title, date, description, place, owner, artworks } = req.body;
+    const { title, date, description, place, owner, artworks, image, dateend } = req.body;
     const userId = req.payload._id;
 
     Exhibition
@@ -15,7 +15,9 @@ router.post('/', isAuthenticated, (req, res, next) => {
             description,
             place,
             owner: userId,
-            artworks
+            artworks,
+            image,
+            dateend
         })
         .then(exhibition => res.status(201).json(exhibition))
         .catch(err => next(err))
@@ -25,7 +27,8 @@ router
     .get('/', isAuthenticated, (req, res, next) => {
         Exhibition
             .find()
-            .populate('owner artworks')
+            .populate('Owner')
+            // .populate('Artwork')
             .then(exhibitions => res.status(200).json(exhibitions))
             .catch(err => next(err))
     });
@@ -38,6 +41,8 @@ router
 
         Exhibition
             .findById(artworkId)
+            .populate('owner')
+            // .populate('Artwork')
             .then(response => res.json(response))
             .catch(err => next(err))
     });
@@ -46,10 +51,10 @@ router
 router
     .put('/:id', isAuthenticated, (req, res, next) => {
 
-        const { title, date, description, place, owner, artworks } = req.body
+        const { title, date, description, place, owner, artworks, image, dateend } = req.body
 
         Exhibition
-            .findByIdAndUpdate(req.params.id, { title, date, description, place, owner, artworks }, { new: true })
+            .findByIdAndUpdate(req.params.id, { title, date, description, place, owner, artworks, image, dateend }, { new: true })
             .then(exhibitions => res.status(200).json(exhibitions))
             .catch(err => next(err))
     });

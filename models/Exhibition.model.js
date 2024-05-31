@@ -9,6 +9,10 @@ const exhibitionSchema = new Schema({
         type: Date,
         required: true
     },
+    dateend: {
+        type: Date,
+        required: true
+    },
     description: {
         type: String,
         required: true
@@ -16,6 +20,11 @@ const exhibitionSchema = new Schema({
     place: {
         type: String,
         required: true
+    },
+    image: {
+        type: String,
+        required: true
+
     },
     owner: {
         type: Schema.Types.ObjectId,

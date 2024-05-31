@@ -9,11 +9,11 @@ const saltRounds = 10
 
 router.post("/signup", (req, res, next) => {
 
-    const { email, password, username, lastname, country, birthyear, userimage, userbio } = req.body //---------------MODIFICAR CMAPOS DE USER 
+    const { email, password, username, lastname, country, birthyear, userimage, backgrdimage, userbio } = req.body //---------------MODIFICAR CMAPOS DE USER 
 
     if (email === '' || password === '' || username === '' ||
         lastname === '' || country === '' || birthyear === '' ||
-        userimage === '' || userbio === '') {
+        userimage === '' || backgrdimage === '' || userbio === '') {
         res.status(400).json({ message: "Provide all the information" })
         return
     }
@@ -40,7 +40,7 @@ router.post("/signup", (req, res, next) => {
             const hashedPassword = bcrypt.hashSync(password, salt);
 
             User
-                .create({ username, email, password: hashedPassword, lastname, country, birthyear, userimage, userbio })
+                .create({ username, email, password: hashedPassword, lastname, country, birthyear, userimage, backgrdimage, userbio })
                 .then(() => res.sendStatus(201))
                 .catch(err => next(err))
         })

@@ -18,7 +18,6 @@ router
                 year,
                 image,
                 price,
-
             })
             .then(artwork => res.status(201).json(artwork))
             .catch(err => next(err))
@@ -27,7 +26,7 @@ router
 router
     .get('/', (req, res, next) => {
         Artwork.find()
-            .populate('user', 'username lastname')
+            .populate('owner')
             .then(artworks => res.status(200).json(artworks))
             .catch(err => next(err))
     });
@@ -38,10 +37,21 @@ router
 
         const { id: artworkId } = req.params
 
-        console.log(artworkId)
-
         Artwork
             .findById(artworkId)
+            .populate('owner')
+            .then(response => res.json(response))
+            .catch(err => next(err))
+    });
+
+router ///// NUEVA RUTA
+    .get('/artist/:id', isAuthenticated, (req, res, next) => {
+
+        const { id: artistId } = req.params
+
+        Artwork
+            .find({ owner: artistId })
+            .populate('owner')
             .then(response => res.json(response))
             .catch(err => next(err))
     });
