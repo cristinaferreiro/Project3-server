@@ -10,8 +10,7 @@ const app = express();
 
 require("./config")(app);
 
-const routes = require("./routes")(app);
-app.use("/api", routes)
+require("./routes")(app);
 
 require("./error-handling")(app);
 
