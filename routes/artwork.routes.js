@@ -62,8 +62,7 @@ router
         const { title, technique, dimension, year, image, price } = req.body
 
         Artwork
-            .findByIdAndUpdate(
-                req.params.id, { title, technique, dimension, year, image, price }, { new: true })
+            .findByIdAndUpdate(req.params.id, { title, technique, dimension, year, image, price }, { new: true })
             .then(artworks => res.status(200).json(artworks))
             .catch(err => next(err))
     });

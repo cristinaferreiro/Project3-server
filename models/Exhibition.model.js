@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 const exhibitionSchema = new Schema({
     title: {
         type: String,
-        required: true
+        // required: true
     },
     date: {
         type: Date,
@@ -15,15 +15,14 @@ const exhibitionSchema = new Schema({
     },
     description: {
         type: String,
-        required: true
+        // required: true
     },
     place: {
         type: String,
-        required: true
+        // required: true
     },
     image: {
         type: String,
-        required: true
 
     },
     owner: {
