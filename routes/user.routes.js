@@ -22,8 +22,8 @@ router
 
         const promises = [
             User.findById(userId),
-            Exhibition.find({ owner: userId }),
-            Artwork.find({ owner: userId })
+            Exhibition.find({ owner: userId }).populate('owner'),
+            Artwork.find({ owner: userId }).populate('owner')
         ]
 
         Promise

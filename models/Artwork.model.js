@@ -27,6 +27,30 @@ const artworkSchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    auction: {
+        initialPrice: Number,
+        startDate: Date,
+        endDate: Date,
+        active: {
+            type: Boolean,
+            default: true
+        },
+        bids: [
+            {
+                user: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'User'
+                },
+                amount: {
+                    type: Number
+                },
+                date: {
+                    type: Date,
+                    default: Date.now()
+                }
+            }
+        ]
     }
 }, {
     timestamps: true
