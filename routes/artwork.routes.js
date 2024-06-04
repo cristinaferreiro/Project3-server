@@ -6,7 +6,7 @@ const { isAuthenticated } = require('./../middleware/jwt.middleware');
 router
     .post('/', isAuthenticated, (req, res, next) => {
 
-        const { title, technique, dimension, year, image, price } = req.body;
+        const { title, technique, dimension, year, image, price, auction } = req.body;
         const owner = req.payload._id;
 
         Artwork
@@ -18,6 +18,8 @@ router
                 year,
                 image,
                 price,
+                auction,
+
             })
             .then(artwork => res.status(201).json(artwork))
             .catch(err => next(err))
@@ -59,10 +61,10 @@ router ///// NUEVA RUTA
 
 router
     .put('/:id', isAuthenticated, (req, res, next) => {
-        const { title, technique, dimension, year, image, price } = req.body
+        const { title, technique, dimension, year, image, price, auction } = req.body
 
         Artwork
-            .findByIdAndUpdate(req.params.id, { title, technique, dimension, year, image, price }, { new: true })
+            .findByIdAndUpdate(req.params.id, { title, technique, dimension, year, image, price, auction }, { new: true })
             .then(artworks => res.status(200).json(artworks))
             .catch(err => next(err))
     });

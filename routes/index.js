@@ -13,4 +13,7 @@ module.exports = app => {
 
   const uploadRouter = require("./upload.routes")
   app.use("/api/upload", uploadRouter)
+
+  const bidsRouter = require("./bids.routes")
+  app.use("/api/bids", bidsRouter)
 }
