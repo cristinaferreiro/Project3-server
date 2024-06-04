@@ -29,7 +29,6 @@ const artworkSchema = new Schema({
         required: true
     },
     auction: {
-        initialPrice: Number,
         startDate: Date,
         endDate: Date,
         active: {
