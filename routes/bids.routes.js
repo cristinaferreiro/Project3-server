@@ -14,6 +14,7 @@ router
 
         Artwork
             .findByIdAndUpdate(artworkId, { $push: { 'auction.bids': bidData } }, { new: true })
+            .populate('auction.bids.user')
             .then(artwork => res.status(201).json(artwork))
             .catch(err => next(err))
     })
@@ -25,8 +26,9 @@ router
 
         Artwork
             .findById(artworkId)
+            .populate('auction.bids.user')
             .select('auction')
-            .then(response => res.json(response))
+            .then(artwork => res.json(artwork))
             .catch(err => next(err))
     })
 
