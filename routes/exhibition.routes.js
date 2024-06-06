@@ -28,7 +28,7 @@ router
         Exhibition
             .find()
             .populate('owner')
-            // .populate('Artwork')
+            // .populate('artworks')
             .then(exhibitions => res.status(200).json(exhibitions))
             .catch(err => next(err))
     });
@@ -42,7 +42,7 @@ router
         Exhibition
             .findById(artworkId)
             .populate('owner')
-            // .populate('Artwork')
+            .populate('artworks')
             .then(response => res.json(response))
             .catch(err => next(err))
     });
